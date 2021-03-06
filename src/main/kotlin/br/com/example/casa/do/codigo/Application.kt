@@ -1,4 +1,4 @@
-package br.com.example
+package br.com.example.casa.`do`.codigo
 
 import io.micronaut.runtime.Micronaut.*
 import io.swagger.v3.oas.annotations.*

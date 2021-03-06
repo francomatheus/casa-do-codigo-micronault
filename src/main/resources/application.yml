@@ -8,6 +8,10 @@ micronaut:
         enabled: true
         descriptions: true
         step: PT1M
+
+server:
+  port: 8080
+
 datasources:
   default:
     url: ${DB_URI:`jdbc:postgresql://localhost:5432/postgres`}

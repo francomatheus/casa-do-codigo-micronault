@@ -9,7 +9,7 @@ plugins {
 }
 
 version = "0.1"
-group = "br.com.example"
+group = "br.com.example.casa.do.codigo"
 
 val kotlinVersion=project.properties.get("kotlinVersion")
 repositories {
