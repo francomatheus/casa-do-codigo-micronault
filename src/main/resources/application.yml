@@ -10,13 +10,21 @@ micronaut:
         step: PT1M
 datasources:
   default:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: ${DB_URI:`jdbc:postgresql://localhost:5432/postgres`}
     driverClassName: org.postgresql.Driver
-    username: postgres
-    password: ''
+    username: ${DB_USER:admin}
+    password: ${DB_PASSWORD:secret}
     schema-generate: CREATE_DROP
     dialect: POSTGRES
-jpa.default.properties.hibernate.hbm2ddl.auto: update
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
+
 tracing:
   jaeger:
     enabled: true
