@@ -27,9 +27,13 @@ dependencies {
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-runtime")
 
+    // VALIDATION
+    // Implementa o Bean Validation
     implementation("io.micronaut.beanvalidation:micronaut-hibernate-validator")
+    // Criação de novas annotations
     implementation("io.micronaut:micronaut-validation")
 
+    // DATABASE
     annotationProcessor("io.micronaut.data:micronaut-data-processor")
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("io.micronaut.sql:micronaut-hibernate-jpa")
@@ -37,6 +41,9 @@ dependencies {
     implementation("org.postgresql:postgresql")
     implementation("io.micronaut.flyway:micronaut-flyway")
     runtimeOnly("com.h2database:h2")
+    // configura JPA EntityManager
+    implementation("io.micronaut.configuration:micronaut-hibernate-jpa:2.2.6")
+
 
     implementation("javax.annotation:javax.annotation-api")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")

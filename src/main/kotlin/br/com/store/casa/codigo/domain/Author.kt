@@ -7,6 +7,7 @@ import javax.persistence.*
 @Table(name = "author")
 data class Author(
         val name: String,
+        @Column(unique = true)
         val email: String,
         val description: String
 ) {

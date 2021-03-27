@@ -5,4 +5,7 @@ import io.micronaut.data.annotation.Repository
 import io.micronaut.data.jpa.repository.JpaRepository
 
 @Repository
-interface AuthorRepository: JpaRepository<Author, Int>
+interface AuthorRepository: JpaRepository<Author, Int> {
+
+    fun findByEmail(email: String): List<Author>
+}
