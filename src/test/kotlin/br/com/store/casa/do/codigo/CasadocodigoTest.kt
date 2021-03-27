@@ -1,4 +1,4 @@
-package br.com.example.casa.`do`.codigo
+package br.com.store.casa.do.codigo
 import io.micronaut.runtime.EmbeddedApplication
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import org.junit.jupiter.api.Assertions
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 import javax.inject.Inject
 
 @MicronautTest
-class CasaDoCodigoTest {
+class CasadocodigoTest {
 
     @Inject
     lateinit var application: EmbeddedApplication<*>

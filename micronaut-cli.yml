@@ -1,6 +1,6 @@
 applicationType: default
-defaultPackage: br.com.example
+defaultPackage: br.com.store.casa.do.codigo
 testFramework: junit
 sourceLanguage: kotlin
 buildTool: gradle_kotlin
-features: [annotation-api, app-name, data, data-jpa, flyway, gradle, hibernate-jpa, hibernate-validator, http-client, jdbc-hikari, jib, junit, kotlin, kotlin-application, kubernetes, log4j2, management, micrometer, micrometer-prometheus, mockito, netty-server, openapi, postgres, readme, shade, testcontainers, tracing-jaeger, yaml]
+features: [annotation-api, app-name, gradle, hibernate-validator, http-client, jdbc-hikari, junit, kotlin, kotlin-application, logback, netty-server, postgres, reactor, readme, shade, testcontainers, yaml]

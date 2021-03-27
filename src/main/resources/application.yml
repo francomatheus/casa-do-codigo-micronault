@@ -1,36 +1,39 @@
 micronaut:
   application:
-    name: casaDoCodigo
-  metrics:
-    enabled: true
-    export:
-      prometheus:
-        enabled: true
-        descriptions: true
-        step: PT1M
-
-server:
-  port: 8080
-
+    name: casadocodigo
 datasources:
   default:
-    url: ${DB_URI:`jdbc:postgresql://localhost:5432/postgres`}
+    url: jdbc:postgresql://localhost:5432/cdc
     driverClassName: org.postgresql.Driver
-    username: ${DB_USER:admin}
-    password: ${DB_PASSWORD:secret}
-    schema-generate: CREATE_DROP
+    username: admin
+    password: secret
     dialect: POSTGRES
+#    url: ${JDBC_URL:`jdbc:h2:mem:default;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE`}
+#    username: ${JDBC_USER:sa}
+#    password: ${JDBC_PASSWORD:""}
+#    driverClassName: ${JDBC_DRIVER:org.h2.Driver}
+#    dialect: H2
+    minPoolSize: 1
+    maxPoolSize: 10
 
 jpa:
   default:
+    entity-scan:
+      packages: 'br.com.store.casa.codigo'
     properties:
       hibernate:
-        hbm2ddl:
-          auto: update
-        show_sql: true
+        hbm2dll:
+          auto: none
+      show_sql: true
 
-tracing:
-  jaeger:
+flyway:
+  datasources:
+    default:
+      enabled: true
+    locations:
+      classpath: 'src/main/resources/databsemigrations'
+
+endpoints:
+  flyway:
     enabled: true
-    sampler:
-      probability: 0.1
+    sensitive: false
