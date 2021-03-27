@@ -7,6 +7,7 @@ import br.com.store.casa.codigo.domain.Book
 import br.com.store.casa.codigo.repository.BookRepository
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
+import io.micronaut.http.MutableHttpResponse
 import io.micronaut.http.annotation.*
 import io.micronaut.validation.Validated
 import org.slf4j.LoggerFactory
@@ -26,18 +27,6 @@ open class BookController(
 
     private val logger = LoggerFactory.getLogger(javaClass)
 
-    @Post("/v1/books")
-    @Transactional
-    open fun newBook(@Body @Valid newBookRequest: BookRequest): HttpResponse<Any>{
-        logger.info("class=BookController, method=newBook, message=create a new book, bookRequest={} ", newBookRequest)
-
-        val newBook = newBookRequest.toDomain(entityManager)
-
-        entityManager.persist(newBook)
-
-        return HttpResponse.ok(BookResponse(newBook))
-    }
-
     @Get("/v1/books")
     @Transactional
     open fun listAllBooks(): HttpResponse<Any>{
@@ -49,6 +38,29 @@ open class BookController(
             }.toList()
 
         return HttpResponse.ok(resultList)
+    }
+
+    @Get("/v1/books/{idBook}")
+    @Transactional
+    open fun detailsBook(@PathVariable idBook: Long): HttpResponse<Any> {
+        val detailsBook = entityManager.find(Book::class.java, idBook)
+        if (detailsBook == null){
+            return HttpResponse.notFound("id $idBook not found")
+        }
+
+        return HttpResponse.ok(BookResponse(detailsBook))
+    }
+
+    @Post("/v1/books")
+    @Transactional
+    open fun newBook(@Body @Valid newBookRequest: BookRequest): HttpResponse<Any>{
+        logger.info("class=BookController, method=newBook, message=create a new book, bookRequest={} ", newBookRequest)
+
+        val newBook = newBookRequest.toDomain(entityManager)
+
+        entityManager.persist(newBook)
+
+        return HttpResponse.ok(BookResponse(newBook))
     }
 
     @Error(exception = ConstraintViolationException::class)
