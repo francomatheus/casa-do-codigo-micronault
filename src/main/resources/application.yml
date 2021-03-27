@@ -23,15 +23,14 @@ jpa:
     properties:
       hibernate:
         hbm2dll:
-          auto: none
+          auto: update
       show_sql: true
 
 flyway:
   datasources:
     default:
       enabled: true
-    locations:
-      classpath: 'src/main/resources/databsemigrations'
+#      locations: classpath:db/migration
 
 endpoints:
   flyway:

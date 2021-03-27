@@ -1,13 +1,14 @@
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.4.30"
     id("org.jetbrains.kotlin.kapt") version "1.4.30"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.4.30"
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.4.31"
     id("com.github.johnrengelman.shadow") version "6.1.0"
     id("io.micronaut.application") version "1.4.2"
+    id("org.jetbrains.kotlin.plugin.noarg") version "1.4.31"
 }
 
 version = "0.1"
-group = "br.com.store.casa.do.codigo"
+group = "br.com.store.casa.codigo"
 
 val kotlinVersion=project.properties.get("kotlinVersion")
 repositories {
@@ -19,7 +20,7 @@ micronaut {
     testRuntime("junit5")
     processing {
         incremental(true)
-        annotations("br.com.store.casa.do.codigo.*")
+        annotations("br.com.store.casa.codigo.*")
     }
 }
 

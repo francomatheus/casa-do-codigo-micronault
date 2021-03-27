@@ -1,9 +1,9 @@
 package br.com.store.casa.codigo.controller
 
-import br.com.store.casa.codigo.controller.model.request.AuthorRequest
-import br.com.store.casa.codigo.controller.model.response.AuthorResponse
+import br.com.store.casa.codigo.controller.model.request.CategoryRequest
+import br.com.store.casa.codigo.controller.model.response.CategoryResponse
 import br.com.store.casa.codigo.controller.model.response.MessageError
-import br.com.store.casa.codigo.repository.AuthorRepository
+import br.com.store.casa.codigo.repository.CategoryRepository
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.annotation.Body
@@ -14,33 +14,27 @@ import io.micronaut.validation.Validated
 import org.slf4j.LoggerFactory
 import java.time.LocalDateTime
 import javax.inject.Inject
-import javax.transaction.Transactional
 import javax.validation.ConstraintViolationException
 import javax.validation.Valid
 import kotlin.streams.toList
 
-const val ONE = 1.toInt()
-
 @Controller("/cdc")
 @Validated
-class AuthorController(
+class CategoryController(
+    @Inject private val categoryRepository: CategoryRepository
 ) {
 
     private val logger = LoggerFactory.getLogger(javaClass)
 
-    @Inject
-    lateinit var  authorRepository: AuthorRepository
+    @Post("/v1/categories")
+    fun newCategory(@Body @Valid newCategoryRequest: CategoryRequest): HttpResponse<Any>{
+        logger.info("class=CategoryController, method=newCategory, message=create new category, categoryRequest={}", newCategoryRequest)
 
-    @Post("/v1/authores")
-    @Transactional
-    fun newAuthor(@Body @Valid authorRequest: AuthorRequest): HttpResponse<AuthorResponse>? {
-        logger.info("class=AuthorController, method=newAuthor, authorRequest={} ", authorRequest)
+        val category = newCategoryRequest.toDomain()
 
-        val author = authorRequest.toDomain()
+        val categorySaved = categoryRepository.save(category)
 
-        val authorSaved = authorRepository.save(author)
-
-        return HttpResponse.ok(AuthorResponse(authorSaved))
+        return HttpResponse.ok(CategoryResponse(categorySaved))
     }
 
     @Error(exception = ConstraintViolationException::class)

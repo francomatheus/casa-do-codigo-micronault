@@ -11,11 +11,12 @@ data class Author(
         val email: String,
         val description: String
 ) {
+    @Deprecated(message = "Just for JPA")
     constructor() : this("","","")
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int? = null
+    var id: Long? = null
 
     val instance: LocalDateTime = LocalDateTime.now()
 }

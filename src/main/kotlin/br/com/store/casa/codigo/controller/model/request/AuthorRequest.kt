@@ -1,6 +1,7 @@
 package br.com.store.casa.codigo.controller.model.request
 
 import br.com.store.casa.codigo.annotation.EmailUnique
+import br.com.store.casa.codigo.annotation.NotDuplicated
 import br.com.store.casa.codigo.domain.Author
 import io.micronaut.core.annotation.Introspected
 import javax.validation.constraints.Email
@@ -18,7 +19,7 @@ data class AuthorRequest(
     val name: String,
     @field: NotBlank
     @field: Email
-    @field: EmailUnique
+    @field: NotDuplicated(className = "Author", fieldName = "email")
     val email: String,
     @field: NotBlank
     @field: Size(max = 400)
