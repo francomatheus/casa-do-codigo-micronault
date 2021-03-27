@@ -6,6 +6,8 @@ import br.com.store.casa.codigo.domain.Book
 import br.com.store.casa.codigo.domain.Category
 import com.fasterxml.jackson.annotation.JsonFormat
 import io.micronaut.core.annotation.Introspected
+import io.micronaut.http.HttpStatus
+import io.micronaut.http.exceptions.HttpStatusException
 import java.math.BigDecimal
 import java.time.LocalDate
 import javax.persistence.EntityManager
@@ -40,8 +42,10 @@ data class BookRequest(
 ) {
     fun toDomain(entityManager: EntityManager): Book {
         val author = entityManager.find(Author::class.java, idAuthor)
+            ?: throw HttpStatusException(HttpStatus.NOT_FOUND, "Author not fount with id $idAuthor")
 
         val category = entityManager.find(Category::class.java, idCategory)
+            ?: throw HttpStatusException(HttpStatus.NOT_FOUND, "Country not fount with id $idCategory")
 
         return Book(
             title = title,
